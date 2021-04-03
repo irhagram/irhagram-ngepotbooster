@@ -1,7 +1,7 @@
 
 print('^1[^9irhagram^1]^3|----------------------------------anoni4m-----------------------------------------|')
 print('^1[^9irhagram^1]^3|                 Script Ngepot Booster Made by Roy/anoni4m 2021                   |')
-print('^1[^9irhagram^1]^3|                              versi anoni-1.3                                     |')
+print('^1[^9irhagram^1]^3|                              versi anoni-1.4                                     |')
 print('^1[^9irhagram^1]^3|             https://github.com/irhagram/irhagram-ngepotbooster                   |')
 print('^1[^9irhagram^1]^3|----------------------------------anoni4m-----------------------------------------|')
 --[PANGGILAN KEPADA NITRO]
@@ -12,6 +12,7 @@ local soundofnitro
 local sound = false
 local exhausts = {}
 local engineon
+local nitroBelum = 0
 
 --[PANGGILAN KEPADA NGEPOT]
 local score = 0
@@ -19,7 +20,7 @@ local screenScore = 0
 local tick
 local idleTime
 local driftTime
-local tablemultiplier = {350,1400,4200,11200}
+local tablemultiplier = {1000,5000,10000,50000}
 local mult = 0.2
 local previous = 0
 local total = 0
@@ -41,7 +42,7 @@ end)
 Citizen.CreateThread( function()
 	
 	-- Save/Load functions -- 
-	TriggerServerEvent("RequestConfig")
+	-- TriggerServerEvent("RequestConfig")
 	
 	-- function SaveScore()
 	-- 	_,PlayerScore = StatGetInt("MP0_DRIFT_SCORE", -1)
@@ -151,10 +152,22 @@ Citizen.CreateThread( function()
 				previous = score
 				previous = calculateBonus(previous)
 				
+				if nitroBelum == 0 then
+
 				total = total+previous
-				nitro = previous/400
+				nitro = previous/1000
 				nitro = round(nitro)
 				TriggerServerEvent("driftcounter:payDrift", nitro )
+				nitroBelum = nitro
+
+				else
+					total = total+previous
+				nitro = previous/1000
+				nitro = round(nitro) + nitroBelum
+				TriggerServerEvent("driftcounter:payDrift", nitro )
+				nitroBelum = nitro
+				end
+
 				TriggerEvent("driftcounter:DriftFinished", previous)
 				_,oldScore = StatGetInt("MP0_DRIFT_SCORE",-1)
 				StatSetInt("MP0_DRIFT_SCORE", oldScore+previous, true)
@@ -226,55 +239,55 @@ end
 
 -- BASE NYA EFEK NGEPOT BOOSTER
 
-function flame (veh, count)
-  if exhausts then
-    if not HasNamedPtfxAssetLoaded("core") then
-      RequestNamedPtfxAsset("core")
-      while not HasNamedPtfxAssetLoaded("core") do
-        Wait(1)
-      end
-    end
-    if count == 1 then
-      UseParticleFxAssetNextCall("core")
-      fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
-      Wait(0)
-      StopParticleFxLooped(fire, false)
-    elseif count == 2 then
-      UseParticleFxAssetNextCall("core")
-      fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
-      UseParticleFxAssetNextCall("core")
-      fire2 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[2], 1.0, 0, 0, 0)
-      Wait(0)
-      StopParticleFxLooped(fire, false)
-      StopParticleFxLooped(fire2, false)
-    elseif count == 3 then
-      UseParticleFxAssetNextCall("core")
-      fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
-      UseParticleFxAssetNextCall("core")
-      fire2 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[2], 1.0, 0, 0, 0)
-      UseParticleFxAssetNextCall("core")
-      fire3 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[3], 1.0, 0, 0, 0)
-      Wait(0)
-      StopParticleFxLooped(fire, false)
-      StopParticleFxLooped(fire2, false)
-      StopParticleFxLooped(fire3, false)
-    elseif count == 4 then
-      UseParticleFxAssetNextCall("core")
-      fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
-      UseParticleFxAssetNextCall("core")
-      fire2 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[2], 1.0, 0, 0, 0)
-      UseParticleFxAssetNextCall("core")
-      fire3 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[3], 1.0, 0, 0, 0)
-      UseParticleFxAssetNextCall("core")
-      fire4 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[4], 1.0, 0, 0, 0)
-      Wait(0)
-      StopParticleFxLooped(fire, false)
-      StopParticleFxLooped(fire2, false)
-      StopParticleFxLooped(fire3, false)
-      StopParticleFxLooped(fire4, false)
-    end
-  end
-end
+-- function flame (veh, count)
+--   if exhausts then
+--     if not HasNamedPtfxAssetLoaded("core") then
+--       RequestNamedPtfxAsset("core")
+--       while not HasNamedPtfxAssetLoaded("core") do
+--         Wait(1)
+--       end
+--     end
+--     if count == 1 then
+--       UseParticleFxAssetNextCall("core")
+--       fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
+--       Wait(0)
+--       StopParticleFxLooped(fire, false)
+--     elseif count == 2 then
+--       UseParticleFxAssetNextCall("core")
+--       fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
+--       UseParticleFxAssetNextCall("core")
+--       fire2 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[2], 1.0, 0, 0, 0)
+--       Wait(0)
+--       StopParticleFxLooped(fire, false)
+--       StopParticleFxLooped(fire2, false)
+--     elseif count == 3 then
+--       UseParticleFxAssetNextCall("core")
+--       fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
+--       UseParticleFxAssetNextCall("core")
+--       fire2 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[2], 1.0, 0, 0, 0)
+--       UseParticleFxAssetNextCall("core")
+--       fire3 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[3], 1.0, 0, 0, 0)
+--       Wait(0)
+--       StopParticleFxLooped(fire, false)
+--       StopParticleFxLooped(fire2, false)
+--       StopParticleFxLooped(fire3, false)
+--     elseif count == 4 then
+--       UseParticleFxAssetNextCall("core")
+--       fire = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[1], 1.0, 0, 0, 0)
+--       UseParticleFxAssetNextCall("core")
+--       fire2 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[2], 1.0, 0, 0, 0)
+--       UseParticleFxAssetNextCall("core")
+--       fire3 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[3], 1.0, 0, 0, 0)
+--       UseParticleFxAssetNextCall("core")
+--       fire4 = StartParticleFxLoopedOnEntityBone_2("veh_backfire", veh, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, exhausts[4], 1.0, 0, 0, 0)
+--       Wait(0)
+--       StopParticleFxLooped(fire, false)
+--       StopParticleFxLooped(fire2, false)
+--       StopParticleFxLooped(fire3, false)
+--       StopParticleFxLooped(fire4, false)
+--     end
+--   end
+-- end
 
 Citizen.CreateThread(function()
   while true do
@@ -297,20 +310,20 @@ Citizen.CreateThread(function()
       Citizen.InvokeNative(0x93A3996368C94158, veh, 50.0)
       nitroUsed = true
 
-      if sound == false then
-        soundofnitro = PlaySoundFromEntity(GetSoundId(), "Flare", veh, "DLC_HEISTS_BIOLAB_FINALE_SOUNDS", 0, 0)
-        sound = true
-      end
+    --   if sound == false then
+    --     soundofnitro = PlaySoundFromEntity(GetSoundId(), "Flare", veh, "DLC_HEISTS_BIOLAB_FINALE_SOUNDS", 0, 0)
+    --     sound = true
+    --   end
     else
       nitroUsed = false
       Citizen.InvokeNative(0xB59E4BD37AE292DB, veh, 1.0)
       Citizen.InvokeNative(0x93A3996368C94158, veh, 1.0)
 
-      if sound == true then
-        StopSound(soundofnitro)
-        ReleaseSoundId(soundofnitro)
-        sound = false
-      end
+    --   if sound == true then
+    --     StopSound(soundofnitro)
+    --     ReleaseSoundId(soundofnitro)
+    --     sound = false
+    --   end
     end
   end
 end)
@@ -328,40 +341,41 @@ Citizen.CreateThread(function()
     if nitroUsed then
       Wait(100)
       nitro = nitro - 1
+	  nitroBelum = nitro
     end
 
-    if IsThisModelACar(hash) and veh ~= nitroveh then
-        exhausts = {}
+    -- if IsThisModelACar(hash) and veh ~= nitroveh then
+    --     exhausts = {}
 
-        for i=1,12 do
+    --     for i=1,12 do
 
-          local exhaust = GetEntityBoneIndexByName(veh, "exhaust_" .. i)
+    --       local exhaust = GetEntityBoneIndexByName(veh, "exhaust_" .. i)
 
-          if i == 1 and GetEntityBoneIndexByName(veh, "exhaust") ~= -1 then
-            table.insert(exhausts, GetEntityBoneIndexByName(veh, "exhaust"))
-          end
-          if exhaust ~= -1 then
-            table.insert(exhausts, exhaust)
-          end
-        end
-    end
+    --       if i == 1 and GetEntityBoneIndexByName(veh, "exhaust") ~= -1 then
+    --         table.insert(exhausts, GetEntityBoneIndexByName(veh, "exhaust"))
+    --       end
+    --       if exhaust ~= -1 then
+    --         table.insert(exhausts, exhaust)
+    --       end
+    --     end
+    -- end
 
   end
 end)
 
 -- EFEK NGEPOT BOOSTER
-Citizen.CreateThread(function()
-  while true do
-    Wait(10)
-    if nitroUsed then
+-- Citizen.CreateThread(function()
+--   while true do
+--     Wait(10)
+--     if nitroUsed then
 
-      local ped = GetPlayerPed(-1)
-      local veh = GetVehiclePedIsIn(ped, false)
+--       local ped = GetPlayerPed(-1)
+--       local veh = GetVehiclePedIsIn(ped, false)
 
-      if exhausts ~= {} then
-        flame(veh, #exhausts)
-      end
+--       if exhausts ~= {} then
+--         flame(veh, #exhausts)
+--       end
 
-    end
-  end
-end)
+--     end
+--   end
+-- end)
