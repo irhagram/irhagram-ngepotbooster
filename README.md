@@ -2,6 +2,20 @@
 Ngepot-Ngepot eh dapet Booster, terinspirasi dari NFS.
 Status: Belum dioptimalkan
 
+
+v1.4 - NEW UPDATE
+---------------
+```
+1. Kini sudah dengan akumulasi Nitro, jadi bisa menabung nitro,
+dengan cara ngepot-ngepot.
+2. Rate Score nya dari 400 menjadi 1000 per 1 Ngepot Booster,
+Update selanjutnya anda bisa mengatur sendiri pada local yang akan
+disediakan atau dalam bentuk config.lua
+3. Optimalisasi Script dari 0.48ms ke 0.28ms, akan selalu diusahakan
+untuk mengomptimalkan Script, pada Update kali ini, saya menghilangkan
+efek dari flame.
+```
+
 v1.0 - NGEPOT BOOSTER
 ------------------------------
 ```
